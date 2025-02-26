@@ -1,26 +1,79 @@
 import React from 'react';
 import Snake from './Snake';
+import { GameState } from '../logic/types';
 
 interface GameBoardProps {
-  gameState: {
-    snake: { x: number; y: number }[];
-    food: { x: number; y: number };
-    item: { x: number; y: number };
-    direction: { x: number; y: number };
-    isGameOver: boolean;
-  };
-  boardRef: React.RefObject<HTMLDivElement | null>;
-  virtualResolution: number;
-  resetGame: () => void;
+  gameState: GameState;
+  onPause: () => void;
+  onReset: () => void;
+  boardSize?: number; // for styling
 }
 
-const GameBoard: React.FC<GameBoardProps> = ({ gameState, boardRef, virtualResolution }) => {
+const GameBoard: React.FC<GameBoardProps> = ({
+  gameState,
+  onPause,
+  onReset,
+  boardSize = 400,
+}) => {
+  const cellSize = 20;
+  const boardStyle: React.CSSProperties = {
+    width: boardSize,
+    height: boardSize,
+    position: 'relative',
+    border: '2px solid var(--border-color)',
+    backgroundColor: 'var(--background-color)',
+    margin: '0 auto',
+  };
+
+  const { snake, food, item, score, isPaused } = gameState;
+
   return (
-    <div ref={boardRef} className="game-board">
-      <div className="virtual-board" style={{ transform: `scale(${(boardRef.current?.clientWidth ?? virtualResolution) / virtualResolution})` }}>
-        <Snake snake={gameState.snake} />
-        <div className="food" style={{ left: `${gameState.food.x * 20}px`, top: `${gameState.food.y * 20}px`, width: '20px', height: '20px' }} />
-        <div className="item" style={{ left: `${gameState.item.x * 20}px`, top: `${gameState.item.y * 20}px`, width: '20px', height: '20px' }} />
+    <div style={{ textAlign: 'center' }}>
+      <div style={{ marginBottom: 16 }}>
+        <strong>Score:</strong> {score}{" "}
+        <span style={{ marginLeft: '1rem' }}>
+          <strong>Paused:</strong> {isPaused ? 'Yes' : 'No'}
+        </span>
+      </div>
+
+      <div style={boardStyle}>
+        {/* Snake */}
+        <Snake snake={snake} cellSize={cellSize} />
+
+        {/* Food */}
+        <div
+          style={{
+            position: 'absolute',
+            left: food.x * cellSize,
+            top: food.y * cellSize,
+            width: cellSize,
+            height: cellSize,
+            backgroundColor: 'var(--food-color)',
+            borderRadius: 4,
+          }}
+        />
+
+        {/* Item */}
+        <div
+          style={{
+            position: 'absolute',
+            left: item.x * cellSize,
+            top: item.y * cellSize,
+            width: cellSize,
+            height: cellSize,
+            backgroundColor: 'var(--item-color)',
+            borderRadius: 4,
+          }}
+        />
+      </div>
+
+      <div style={{ marginTop: 16 }}>
+        <button onClick={onPause} style={{ marginRight: 8 }}>
+          {isPaused ? 'Resume' : 'Pause'}
+        </button>
+        <button onClick={onReset}>
+          Reset
+        </button>
       </div>
     </div>
   );

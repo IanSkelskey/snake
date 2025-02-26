@@ -1,25 +1,29 @@
 import React from 'react';
+import { SnakeSegment } from '../logic/types';
 
 interface SnakeProps {
-  snake: { x: number; y: number }[];
+  snake: SnakeSegment[];
+  cellSize?: number; // Adjust if you want different rendering
 }
 
-const Snake: React.FC<SnakeProps> = ({ snake }) => {
+const Snake: React.FC<SnakeProps> = ({ snake, cellSize = 20 }) => {
   return (
-    <div>
+    <>
       {snake.map((segment, index) => (
         <div
           key={index}
-          className="snake"
           style={{
-            left: `${segment.x * 20}px`,
-            top: `${segment.y * 20}px`,
-            width: '20px',
-            height: '20px',
+            position: 'absolute',
+            left: segment.x * cellSize,
+            top: segment.y * cellSize,
+            width: cellSize,
+            height: cellSize,
+            backgroundColor: 'var(--snake-color)',
+            borderRadius: 4,
           }}
         />
       ))}
-    </div>
+    </>
   );
 };
 

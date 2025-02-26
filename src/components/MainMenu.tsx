@@ -8,7 +8,7 @@ interface MainMenuProps {
 const MainMenu: React.FC<MainMenuProps> = ({ onStart }) => {
   return (
     <Container
-      style={{
+      sx={{
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -16,7 +16,7 @@ const MainMenu: React.FC<MainMenuProps> = ({ onStart }) => {
         height: '100vh',
       }}
     >
-      <Typography variant="h2" component="h1" gutterBottom>
+      <Typography variant="h2" gutterBottom>
         Snake Game
       </Typography>
       <Button variant="contained" color="primary" onClick={onStart}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, CssBaseline, ThemeProvider, createTheme, useMediaQuery } from '@mui/material';
-import SnakeGame from './components/SnakeGame';
+import SnakeGame from './SnakeGame';
+import './styles/App.css';
 
 function App() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
