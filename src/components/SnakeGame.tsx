@@ -148,11 +148,15 @@ function SnakeGame() {
             setGameState((prev) => ({ ...prev, direction: { x: 0, y: -1 } }));
           }
         }
-
-        window.removeEventListener('touchmove', handleTouchMove);
       };
 
       window.addEventListener('touchmove', handleTouchMove);
+
+      const handleTouchEnd = () => {
+        window.removeEventListener('touchmove', handleTouchMove);
+      };
+
+      window.addEventListener('touchend', handleTouchEnd);
     };
 
     window.addEventListener('touchstart', handleTouchStart);
