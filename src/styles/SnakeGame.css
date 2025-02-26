@@ -9,7 +9,6 @@
   
   .game-board {
 	width: 100%;
-	max-width: calc(100vh - 96px); /* Subtract the height of the AppBar */
 	aspect-ratio: 1;
 	border: 2px solid var(--border-color);
 	background-color: var(--background-color);

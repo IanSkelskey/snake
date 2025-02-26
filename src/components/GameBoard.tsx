@@ -14,7 +14,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onPause, onReset }) =>
   const { snake, food, item, score, isPaused } = gameState;
 
   return (
-    <Box textAlign="center">
+    <Box textAlign="center" sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
       <Box mb={2}>
         <Typography variant="h6">
           <strong>Score:</strong> {score}{" "}
@@ -27,7 +27,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onPause, onReset }) =>
       <Box
         sx={{
           width: '100%',
-          maxWidth: 'calc(100vh - 96px)',
+          maxWidth: '600px', // Limit the maximum width for large screens
           aspectRatio: '1',
           border: '2px solid var(--border-color)',
           backgroundColor: 'var(--background-color)',
@@ -36,13 +36,12 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onPause, onReset }) =>
         }}
       >
         <Snake snake={snake} />
-
         <BoardObject type="food" position={food} />
         <BoardObject type="item" position={item} />
       </Box>
 
-      <Box mt={2}>
-        <Button variant="contained" color="primary" onClick={onPause} sx={{ mr: 1 }}>
+      <Box mt={2} sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
+        <Button variant="contained" color="primary" onClick={onPause}>
           {isPaused ? 'Resume' : 'Pause'}
         </Button>
         <Button variant="contained" color="secondary" onClick={onReset}>
