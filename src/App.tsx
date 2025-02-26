@@ -1,7 +1,6 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, CssBaseline, ThemeProvider, createTheme, useMediaQuery } from '@mui/material';
-import SnakeGame from './SnakeGame';
-import './styles/App.css';
+import { AppBar, Toolbar, Typography, CssBaseline, ThemeProvider, createTheme, useMediaQuery, Box, Container } from '@mui/material';
+import SnakeGame from './games/SnakeGame';
 
 function App() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -19,7 +18,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div className="App">
+      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh', boxSizing: 'border-box' }}>
         <AppBar position="fixed">
           <Toolbar>
             <Typography variant="h6" component="div">
@@ -28,8 +27,10 @@ function App() {
           </Toolbar>
         </AppBar>
         <Toolbar /> {/* This is to push the content below the AppBar */}
-        <SnakeGame />
-      </div>
+        <Container sx={{ flexGrow: 1, overflow: 'hidden' }}>
+          <SnakeGame />
+        </Container>
+      </Box>
     </ThemeProvider>
   );
 }

@@ -8,9 +8,11 @@ interface GameBoardProps {
   gameState: GameState;
   onPause: () => void;
   onReset: () => void;
+  boardWidth: number;
+  boardHeight: number;
 }
 
-const GameBoard: React.FC<GameBoardProps> = ({ gameState, onPause, onReset }) => {
+const GameBoard: React.FC<GameBoardProps> = ({ gameState, onPause, onReset, boardWidth, boardHeight }) => {
   const { snake, food, item, score, isPaused } = gameState;
 
   return (
@@ -28,16 +30,16 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onPause, onReset }) =>
         sx={{
           width: '100%',
           maxWidth: '600px', // Limit the maximum width for large screens
-          aspectRatio: '1',
+          aspectRatio: `${boardWidth} / ${boardHeight}`,
           border: '2px solid var(--border-color)',
           backgroundColor: 'var(--background-color)',
           position: 'relative',
           overflow: 'hidden',
         }}
       >
-        <Snake snake={snake} />
-        <BoardObject type="food" position={food} />
-        <BoardObject type="item" position={item} />
+        <Snake snake={snake} boardWidth={boardWidth} boardHeight={boardHeight} />
+        <BoardObject type="food" position={food} boardWidth={boardWidth} boardHeight={boardHeight} />
+        <BoardObject type="item" position={item} boardWidth={boardWidth} boardHeight={boardHeight} />
       </Box>
 
       <Box mt={2} sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>

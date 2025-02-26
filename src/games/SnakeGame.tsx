@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from 'react';
-import { Container, Box } from '@mui/material';
-import MainMenu from './components/MainMenu';
-import GameBoard from './components/GameBoard';
-import GameOver from './components/GameOver';
-import { useSnakeGame } from './hooks/useSnakeGame';
-import { useControls } from './logic/controls';
+import { Container } from '@mui/material';
+import MainMenu from '../components/MainMenu';
+import GameBoard from '../components/GameBoard';
+import GameOver from '../components/GameOver';
+import { useSnakeGame } from '../hooks/useSnakeGame';
+import { useControls } from '../logic/controls';
 
 function SnakeGame() {
   const [isStarted, setIsStarted] = useState(false);
@@ -14,7 +14,9 @@ function SnakeGame() {
     setDirection,
     togglePause,
     resetGame,
-  } = useSnakeGame(20, 20);
+    boardWidth,
+    boardHeight,
+  } = useSnakeGame(50, 50);
 
   // Hook up controls
   useControls({
@@ -44,9 +46,8 @@ function SnakeGame() {
         '--snake-color': (theme) => theme.palette.success.main,
         '--food-color': (theme) => theme.palette.error.main,
         '--item-color': (theme) => theme.palette.info.main,
-        minHeight: '100vh',
+        minHeight: '100%',
         width: '100%',
-        padding: 2,
       }}
     >
       {!isStarted ? (
@@ -58,6 +59,8 @@ function SnakeGame() {
           gameState={gameState}
           onPause={togglePause}
           onReset={handleReset}
+          boardWidth={boardWidth}
+          boardHeight={boardHeight}
         />
       )}
     </Container>

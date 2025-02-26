@@ -1,13 +1,14 @@
 import React from 'react';
 import { SnakeSegment } from '../logic/types';
 import { Box } from '@mui/material';
-import '../styles/Snake.css';
 
 interface SnakeProps {
   snake: SnakeSegment[];
+  boardWidth: number;
+  boardHeight: number;
 }
 
-const Snake: React.FC<SnakeProps> = ({ snake }) => {
+const Snake: React.FC<SnakeProps> = ({ snake, boardWidth, boardHeight }) => {
   return (
     <>
       {snake.map((segment, index) => (
@@ -16,8 +17,11 @@ const Snake: React.FC<SnakeProps> = ({ snake }) => {
           className="snake-segment"
           sx={{
             position: 'absolute',
-            left: `${(segment.x / 20) * 100}%`,
-            top: `${(segment.y / 20) * 100}%`,
+            left: `${(segment.x / boardWidth) * 100}%`,
+            top: `${(segment.y / boardHeight) * 100}%`,
+            width: `${100 / boardWidth}%`,
+            height: `${100 / boardHeight}%`,
+            backgroundColor: `var(--snake-color)`,
           }}
         />
       ))}

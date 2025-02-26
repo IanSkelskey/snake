@@ -8,7 +8,7 @@ export function useSnakeGame(boardWidth = 20, boardHeight = 20) {
   const animationRef = useRef<number | null>(null);
 
   const [gameState, setGameState] = useState<GameState>({
-    snake: [{ x: 0, y: 0 }],
+    snake: [{ x: Math.floor(boardWidth / 2), y: Math.floor(boardHeight / 2) }],
     food: { x: 5, y: 5 },
     item: { x: 10, y: 10 },
     direction: { x: 1, y: 0 },
@@ -146,5 +146,7 @@ export function useSnakeGame(boardWidth = 20, boardHeight = 20) {
     setDirection,
     togglePause,
     resetGame,
+    boardWidth,
+    boardHeight,
   };
 }
