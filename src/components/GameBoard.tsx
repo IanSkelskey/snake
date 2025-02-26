@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Button, Typography } from '@mui/material';
 import Snake from './Snake';
 
 interface GameBoardProps {
@@ -20,6 +21,10 @@ interface GameBoardProps {
 
 const GameBoard: React.FC<GameBoardProps> = ({ gameState, setGameState }) => {
   const boardRef = useRef<HTMLDivElement>(null);
+  const virtualResolution = 400; // Set the virtual resolution
+  const lastTimeRef = useRef<number>(0);
+  const accumulatedTimeRef = useRef<number>(0);
+  const frameDuration = 100; // Duration of each frame in milliseconds
 
   const moveSnake = () => {
     setGameState(prevState => {
@@ -96,35 +101,48 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, setGameState }) => {
     });
   };
 
-  useEffect(() => {
+  const gameLoop = (currentTime: number) => {
     if (gameState.isGameOver) return;
 
-    const interval = setInterval(() => {
+    const deltaTime = currentTime - lastTimeRef.current;
+    lastTimeRef.current = currentTime;
+    accumulatedTimeRef.current += deltaTime;
+
+    while (accumulatedTimeRef.current >= frameDuration) {
       moveSnake();
-    }, 100);
+      accumulatedTimeRef.current -= frameDuration;
+    }
+
+    requestAnimationFrame(gameLoop);
+  };
+
+  useEffect(() => {
+    lastTimeRef.current = performance.now();
+    requestAnimationFrame(gameLoop);
 
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      clearInterval(interval);
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [gameState.direction, gameState.isGameOver]);
 
   return (
     <div ref={boardRef} className="game-board">
-      {gameState.isGameOver ? (
-        <>
-          <h1>Game Over</h1>
-          <button onClick={resetGame}>Reset</button>
-        </>
-      ) : (
-        <>
-          <Snake snake={gameState.snake} />
-          <div className="food" style={{ left: `${gameState.food.x * 20}px`, top: `${gameState.food.y * 20}px`, width: '20px', height: '20px' }} />
-          <div className="item" style={{ left: `${gameState.item.x * 20}px`, top: `${gameState.item.y * 20}px`, width: '20px', height: '20px' }} />
-        </>
-      )}
+      <div className="virtual-board" style={{ transform: `scale(${(boardRef.current?.clientWidth ?? virtualResolution) / virtualResolution})` }}>
+        {gameState.isGameOver ? (
+          <>
+            <Typography variant="h4" component="h1">Game Over</Typography>
+            <Button variant="contained" color="primary" onClick={resetGame}>Reset</Button>
+          </>
+        ) : (
+          <>
+            <Snake snake={gameState.snake} />
+            <div className="food" style={{ left: `${gameState.food.x * 20}px`, top: `${gameState.food.y * 20}px`, width: '20px', height: '20px' }} />
+            <div className="item" style={{ left: `${gameState.item.x * 20}px`, top: `${gameState.item.y * 20}px`, width: '20px', height: '20px' }} />
+          </>
+        )}
+      </div>
     </div>
   );
 };
