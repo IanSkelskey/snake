@@ -1,16 +1,30 @@
+/* src/styles/App.css */
 body {
   margin: 0;
   padding: 0;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+.App {
   display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.game-container {
+  display: flex;
+  flex: 1;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f0f0f0;
+  padding: 16px;
+  box-sizing: border-box;
 }
 
 .game-board {
-  width: 400px;
-  height: 400px;
+  width: 100%;
+  max-width: calc(100vh - 96px); /* Subtract the height of the AppBar */
+  aspect-ratio: 1;
   border: 2px solid #333;
   background-color: #fff;
   position: relative;
@@ -19,20 +33,20 @@ body {
 .snake {
   background-color: #4caf50;
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 5%;
+  height: 5%;
 }
 
 .food {
   background-color: #f44336;
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 5%;
+  height: 5%;
 }
 
 .item {
   background-color: #2196f3;
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 5%;
+  height: 5%;
 }
