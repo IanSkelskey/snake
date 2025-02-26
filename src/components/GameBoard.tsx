@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, Box, Typography } from '@mui/material';
 import Snake from './Snake';
 import { GameState } from '../logic/types';
 
@@ -6,7 +7,7 @@ interface GameBoardProps {
   gameState: GameState;
   onPause: () => void;
   onReset: () => void;
-  boardSize?: number; // for styling
+  boardSize?: number;
 }
 
 const GameBoard: React.FC<GameBoardProps> = ({
@@ -28,20 +29,22 @@ const GameBoard: React.FC<GameBoardProps> = ({
   const { snake, food, item, score, isPaused } = gameState;
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <div style={{ marginBottom: 16 }}>
-        <strong>Score:</strong> {score}{" "}
-        <span style={{ marginLeft: '1rem' }}>
-          <strong>Paused:</strong> {isPaused ? 'Yes' : 'No'}
-        </span>
-      </div>
+    <Box textAlign="center">
+      <Box mb={2}>
+        <Typography variant="h6">
+          <strong>Score:</strong> {score}{" "}
+          <span style={{ marginLeft: '1rem' }}>
+            <strong>Paused:</strong> {isPaused ? 'Yes' : 'No'}
+          </span>
+        </Typography>
+      </Box>
 
-      <div style={boardStyle}>
+      <Box style={boardStyle}>
         {/* Snake */}
         <Snake snake={snake} cellSize={cellSize} />
 
         {/* Food */}
-        <div
+        <Box
           style={{
             position: 'absolute',
             left: food.x * cellSize,
@@ -54,7 +57,7 @@ const GameBoard: React.FC<GameBoardProps> = ({
         />
 
         {/* Item */}
-        <div
+        <Box
           style={{
             position: 'absolute',
             left: item.x * cellSize,
@@ -65,17 +68,17 @@ const GameBoard: React.FC<GameBoardProps> = ({
             borderRadius: 4,
           }}
         />
-      </div>
+      </Box>
 
-      <div style={{ marginTop: 16 }}>
-        <button onClick={onPause} style={{ marginRight: 8 }}>
+      <Box mt={2}>
+        <Button variant="contained" color="primary" onClick={onPause} sx={{ mr: 1 }}>
           {isPaused ? 'Resume' : 'Pause'}
-        </button>
-        <button onClick={onReset}>
+        </Button>
+        <Button variant="contained" color="secondary" onClick={onReset}>
           Reset
-        </button>
-      </div>
-    </div>
+        </Button>
+      </Box>
+    </Box>
   );
 };
 
