@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { Position, GameState } from '../logic/types';
 
 export function useSnakeGame(boardWidth = 20, boardHeight = 20) {
@@ -18,10 +18,16 @@ export function useSnakeGame(boardWidth = 20, boardHeight = 20) {
   });
 
   // Helper to place new random food or item
-  const getRandomPosition = (): Position => ({
-    x: Math.floor(Math.random() * boardWidth),
-    y: Math.floor(Math.random() * boardHeight),
-  });
+  const getRandomPosition = (): Position => {
+    let position: Position;
+    do {
+      position = {
+        x: Math.floor(Math.random() * boardWidth),
+        y: Math.floor(Math.random() * boardHeight),
+      };
+    } while (gameState.snake.some(segment => segment.x === position.x && segment.y === position.y));
+    return position;
+  };
 
   const moveSnake = () => {
     setGameState(prev => {
@@ -133,7 +139,7 @@ export function useSnakeGame(boardWidth = 20, boardHeight = 20) {
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [gameState.isPaused, gameState.isGameOver, gameState.direction]);
+  }, [gameState.isPaused, gameState.isGameOver]);
 
   return {
     gameState,

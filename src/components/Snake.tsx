@@ -1,23 +1,23 @@
 import React from 'react';
 import { SnakeSegment } from '../logic/types';
+import { Box } from '@mui/material';
 
 interface SnakeProps {
   snake: SnakeSegment[];
-  cellSize?: number; // Adjust if you want different rendering
 }
 
-const Snake: React.FC<SnakeProps> = ({ snake, cellSize = 20 }) => {
+const Snake: React.FC<SnakeProps> = ({ snake }) => {
   return (
     <>
       {snake.map((segment, index) => (
-        <div
+        <Box
           key={index}
-          style={{
+          sx={{
             position: 'absolute',
-            left: segment.x * cellSize,
-            top: segment.y * cellSize,
-            width: cellSize,
-            height: cellSize,
+            left: `${(segment.x / 20) * 100}%`,
+            top: `${(segment.y / 20) * 100}%`,
+            width: '5%',
+            height: '5%',
             backgroundColor: 'var(--snake-color)',
             borderRadius: 4,
           }}
