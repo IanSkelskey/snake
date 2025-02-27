@@ -7,19 +7,15 @@ export function useControls({ onDirectionChange, onTogglePause }: ControlsOption
       let direction: Direction | null = null;
 
       switch (event.key) {
-        case 'ArrowUp':
         case 'w':
           direction = 'up';
           break;
-        case 'ArrowDown':
         case 's':
           direction = 'down';
           break;
-        case 'ArrowLeft':
         case 'a':
           direction = 'left';
           break;
-        case 'ArrowRight':
         case 'd':
           direction = 'right';
           break;
@@ -75,6 +71,7 @@ export function useControls({ onDirectionChange, onTogglePause }: ControlsOption
       window.addEventListener('touchend', handleTouchEnd);
     };
 
+    window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('touchstart', handleTouchStart, { passive: false });
     window.addEventListener('touchstart', handleTouchStart);
 

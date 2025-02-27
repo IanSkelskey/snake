@@ -18,14 +18,15 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh', width: '100vw', alignItems: 'center' }}>
-        <AppBar position="sticky">
+      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh', width: '100vw', alignItems: 'center', padding: 2 }}>
+        <AppBar position="fixed">
           <Toolbar>
             <Typography variant="h6" component="div">
               Snake Game
             </Typography>
           </Toolbar>
         </AppBar>
+        <Toolbar />
         <Container sx={{ display: 'flex', flexGrow: 1, overflow: 'hidden' }}>
           <SnakeGame />
         </Container>
