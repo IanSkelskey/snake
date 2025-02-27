@@ -35,7 +35,7 @@ To run the game locally, follow these steps:
 
 2. Navigate to the project directory:
    ```
-   cd snake-game
+   cd snake
    ```
 
 3. Install the dependencies:

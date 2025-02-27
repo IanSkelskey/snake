@@ -1,16 +1,21 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Position, GameState } from '../logic/types';
 
 export function useSnakeGame(boardWidth = 20, boardHeight = 20) {
+
+  const INITIAL_SNAKE_POSITION = { x: Math.floor(boardWidth / 2), y: Math.floor(boardHeight / 2) };
+  const INITIAL_FOOD_POSITION = { x: 5, y: 5 };
+  const INITIAL_ITEM_POSITION = { x: 10, y: 10 };
+
   const frameDuration = 150; // ms per movement update
   const lastTimeRef = useRef<number>(0);
   const accumulatedTimeRef = useRef<number>(0);
   const animationRef = useRef<number | null>(null);
 
   const [gameState, setGameState] = useState<GameState>({
-    snake: [{ x: Math.floor(boardWidth / 2), y: Math.floor(boardHeight / 2) }],
-    food: { x: 5, y: 5 },
-    item: { x: 10, y: 10 },
+    snake: [INITIAL_SNAKE_POSITION],
+    food: INITIAL_FOOD_POSITION,
+    item: INITIAL_ITEM_POSITION,
     direction: { x: 1, y: 0 },
     score: 0,
     isPaused: false,
