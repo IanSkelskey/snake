@@ -40,6 +40,7 @@ export function useControls({ onDirectionChange, onTogglePause }: ControlsOption
       const startY = touch.clientY;
 
       const handleTouchMove = (moveEvent: TouchEvent) => {
+        moveEvent.preventDefault();
         const moveTouch = moveEvent.touches[0];
         const diffX = moveTouch.clientX - startX;
         const diffY = moveTouch.clientY - startY;
@@ -74,7 +75,7 @@ export function useControls({ onDirectionChange, onTogglePause }: ControlsOption
       window.addEventListener('touchend', handleTouchEnd);
     };
 
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('touchstart', handleTouchStart, { passive: false });
     window.addEventListener('touchstart', handleTouchStart);
 
     return () => {
