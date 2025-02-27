@@ -1,0 +1,26 @@
+"filename", "language", "JavaScript", "JSON", "TypeScript", "JSON with Comments", "HTML", "Markdown", "TypeScript JSX", "SVG", "YAML", "comment", "blank", "total"
+"c:\Users\iansk\Desktop\GitHub\snake\.github\workflows\publish.yml", "YAML", 0, 0, 0, 0, 0, 0, 0, 0, 29, 5, 8, 42
+"c:\Users\iansk\Desktop\GitHub\snake\README.md", "Markdown", 0, 0, 0, 0, 0, 46, 0, 0, 0, 0, 13, 59
+"c:\Users\iansk\Desktop\GitHub\snake\eslint.config.js", "JavaScript", 27, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 29
+"c:\Users\iansk\Desktop\GitHub\snake\index.html", "HTML", 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 1, 14
+"c:\Users\iansk\Desktop\GitHub\snake\package-lock.json", "JSON", 0, 2319, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2320
+"c:\Users\iansk\Desktop\GitHub\snake\package.json", "JSON", 0, 35, 0, 0, 0, 0, 0, 0, 0, 0, 1, 36
+"c:\Users\iansk\Desktop\GitHub\snake\public\index.html", "HTML", 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 11
+"c:\Users\iansk\Desktop\GitHub\snake\src\App.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 33, 0, 0, 0, 4, 37
+"c:\Users\iansk\Desktop\GitHub\snake\src\assets\snake.svg", "SVG", 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 7
+"c:\Users\iansk\Desktop\GitHub\snake\src\components\BoardObject.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 3, 28
+"c:\Users\iansk\Desktop\GitHub\snake\src\components\GameBoard.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 43, 0, 0, 0, 4, 47
+"c:\Users\iansk\Desktop\GitHub\snake\src\components\GameOver.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 32, 0, 0, 0, 3, 35
+"c:\Users\iansk\Desktop\GitHub\snake\src\components\HUD.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 4, 34
+"c:\Users\iansk\Desktop\GitHub\snake\src\components\MainMenu.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 28, 0, 0, 0, 3, 31
+"c:\Users\iansk\Desktop\GitHub\snake\src\components\Snake.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 85, 0, 0, 3, 4, 92
+"c:\Users\iansk\Desktop\GitHub\snake\src\games\SnakeGame.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 59, 0, 0, 1, 7, 67
+"c:\Users\iansk\Desktop\GitHub\snake\src\hooks\useSnakeGame.ts", "TypeScript", 0, 0, 134, 0, 0, 0, 0, 0, 0, 12, 21, 167
+"c:\Users\iansk\Desktop\GitHub\snake\src\logic\controls.ts", "TypeScript", 0, 0, 38, 0, 0, 0, 0, 0, 0, 0, 4, 42
+"c:\Users\iansk\Desktop\GitHub\snake\src\logic\types.ts", "TypeScript", 0, 0, 28, 0, 0, 0, 0, 0, 0, 7, 6, 41
+"c:\Users\iansk\Desktop\GitHub\snake\src\main.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 1, 10
+"c:\Users\iansk\Desktop\GitHub\snake\tsconfig.app.json", "JSON", 0, 22, 0, 0, 0, 0, 0, 0, 0, 2, 3, 27
+"c:\Users\iansk\Desktop\GitHub\snake\tsconfig.json", "JSON with Comments", 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 15
+"c:\Users\iansk\Desktop\GitHub\snake\tsconfig.node.json", "JSON", 0, 20, 0, 0, 0, 0, 0, 0, 0, 2, 3, 25
+"c:\Users\iansk\Desktop\GitHub\snake\vite.config.ts", "TypeScript", 0, 0, 7, 0, 0, 0, 0, 0, 0, 1, 1, 9
+"Total", "-", 27, 2396, 207, 15, 24, 46, 344, 7, 29, 33, 97, 3225

@@ -35,32 +35,25 @@ function SnakeGame() {
 
   return (
     <Container
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        flexGrow: 1,
-        width: '100%',
-        height: '100%',
-        overflow: 'hidden',
-        '--border-color': (theme) => theme.palette.divider,
-        '--background-color': (theme) => theme.palette.background.default,
-        '--snake-color': (theme) => theme.palette.success.main,
-        '--food-color': (theme) => theme.palette.error.main,
-        '--item-color': (theme) => theme.palette.info.main,
-      }}
+      sx={(theme) => ({
+      '--border-color': theme.palette.divider,
+      '--background-color': theme.palette.background.default,
+      '--snake-color': theme.palette.success.main,
+      '--food-color': theme.palette.error.main,
+      '--item-color': theme.palette.info.main,
+      '--board-color': theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[300],
+      })}
     >
       {!isStarted ? (
-        <MainMenu onStart={handleStart} />
+      <MainMenu onStart={handleStart} />
       ) : gameState.isGameOver ? (
-        <GameOver score={gameState.score} onReset={handleReset} />
+      <GameOver score={gameState.score} onReset={handleReset} />
       ) : (
-        <GameBoard
-          gameState={gameState}
-          onPause={togglePause}
-          onReset={handleReset}
-          boardWidth={boardWidth}
-          boardHeight={boardHeight}
-        />
+      <GameBoard
+        gameState={gameState}
+        boardWidth={boardWidth}
+        boardHeight={boardHeight}
+      />
       )}
     </Container>
   );
