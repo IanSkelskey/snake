@@ -12,7 +12,7 @@ export interface Position {
 	snake: SnakeSegment[];
 	food: Position;
 	item: Position;
-	direction: Position;
+	direction: Direction;
 	score: number;
 	isPaused: boolean;
 	isGameOver: boolean;
@@ -30,7 +30,7 @@ export interface Position {
   
   // ControlsOptions interface to represent the options for game controls
   export interface ControlsOptions {
-	onDirectionChange: (dir: Position) => void;
+	onDirectionChange: (dir: Direction) => void;
 	onTogglePause: () => void;
   }
   

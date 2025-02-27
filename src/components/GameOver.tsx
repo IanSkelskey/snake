@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Typography } from '@mui/material';
+import { Button, Container, Typography, Box } from '@mui/material';
 
 interface GameOverProps {
   score: number;
@@ -17,15 +17,17 @@ const GameOver: React.FC<GameOverProps> = ({ score, onReset }) => {
         height: '100vh',
       }}
     >
-      <Typography variant="h4" gutterBottom>
-        Game Over
-      </Typography>
-      <Typography variant="h6" gutterBottom>
-        Final Score: {score}
-      </Typography>
-      <Button variant="contained" color="primary" onClick={onReset}>
-        Reset Game
-      </Button>
+      <Box textAlign="center">
+        <Typography variant="h4" gutterBottom>
+          Game Over
+        </Typography>
+        <Typography variant="h6" gutterBottom>
+          Final Score: {score}
+        </Typography>
+        <Button variant="contained" color="primary" onClick={onReset}>
+          Reset Game
+        </Button>
+      </Box>
     </Container>
   );
 };

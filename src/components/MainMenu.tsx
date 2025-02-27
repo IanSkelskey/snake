@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Typography } from '@mui/material';
+import { Button, Container, Typography, Box } from '@mui/material';
 
 interface MainMenuProps {
   onStart: () => void;
@@ -16,12 +16,14 @@ const MainMenu: React.FC<MainMenuProps> = ({ onStart }) => {
         height: '100vh',
       }}
     >
-      <Typography variant="h2" gutterBottom>
-        Snake Game
-      </Typography>
-      <Button variant="contained" color="primary" onClick={onStart}>
-        Start Game
-      </Button>
+      <Box textAlign="center">
+        <Typography variant="h2" gutterBottom>
+          Snake Game
+        </Typography>
+        <Button variant="contained" color="primary" onClick={onStart}>
+          Start Game
+        </Button>
+      </Box>
     </Container>
   );
 };

@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
-import { Position, GameState } from '../logic/types';
+import { Position, GameState, Direction } from '../logic/types';
 
 export function useSnakeGame(boardWidth = 20, boardHeight = 20) {
-
   const INITIAL_SNAKE_POSITION = { x: Math.floor(boardWidth / 2), y: Math.floor(boardHeight / 2) };
   const INITIAL_FOOD_POSITION = { x: 5, y: 5 };
   const INITIAL_ITEM_POSITION = { x: 10, y: 10 };
+  const DIRECTIONS: Direction[] = ['up', 'down', 'left', 'right'];
+  const INITIAL_DIRECTION = DIRECTIONS[Math.floor(Math.random() * DIRECTIONS.length)];
 
   const frameDuration = 150; // ms per movement update
   const lastTimeRef = useRef<number>(0);
@@ -16,11 +17,15 @@ export function useSnakeGame(boardWidth = 20, boardHeight = 20) {
     snake: [INITIAL_SNAKE_POSITION],
     food: INITIAL_FOOD_POSITION,
     item: INITIAL_ITEM_POSITION,
-    direction: { x: 1, y: 0 },
+    direction: INITIAL_DIRECTION,
     score: 0,
     isPaused: false,
     isGameOver: false,
   });
+
+  const getRandomDirection = (): Direction => {
+    return DIRECTIONS.filter(dir => dir !== gameState.direction)[Math.floor(Math.random() * (DIRECTIONS.length - 1))];
+  }
 
   // Helper to place new random food or item
   const getRandomPosition = (): Position => {
@@ -37,9 +42,9 @@ export function useSnakeGame(boardWidth = 20, boardHeight = 20) {
   const moveSnake = () => {
     setGameState(prev => {
       const newSnake = [...prev.snake];
-      const head = { 
-        x: newSnake[0].x + prev.direction.x, 
-        y: newSnake[0].y + prev.direction.y 
+      const head = {
+        x: newSnake[0].x + (prev.direction === 'right' ? 1 : prev.direction === 'left' ? -1 : 0),
+        y: newSnake[0].y + (prev.direction === 'down' ? 1 : prev.direction === 'up' ? -1 : 0)
       };
 
       // Insert new head
@@ -65,13 +70,13 @@ export function useSnakeGame(boardWidth = 20, boardHeight = 20) {
 
       // Check collision with walls or self
       if (
-        head.x < 0 || 
-        head.x >= boardWidth || 
-        head.y < 0 || 
+        head.x < 0 ||
+        head.x >= boardWidth ||
+        head.y < 0 ||
         head.y >= boardHeight ||
         newSnake.slice(1).some(segment => segment.x === head.x && segment.y === head.y)
       ) {
-        return { 
+        return {
           ...prev,
           isGameOver: true,
         };
@@ -104,10 +109,15 @@ export function useSnakeGame(boardWidth = 20, boardHeight = 20) {
   };
 
   // Public API methods
-  const setDirection = (dir: Position) => {
+  const setDirection = (dir: Direction) => {
     setGameState(prev => {
       // Prevent 180° reversal in a single move
-      if (prev.direction.x + dir.x === 0 && prev.direction.y + dir.y === 0) {
+      if (
+        (prev.direction === 'left' && dir === 'right') ||
+        (prev.direction === 'right' && dir === 'left') ||
+        (prev.direction === 'up' && dir === 'down') ||
+        (prev.direction === 'down' && dir === 'up')
+      ) {
         return prev; // ignore reversal
       }
       return { ...prev, direction: dir };
@@ -120,10 +130,10 @@ export function useSnakeGame(boardWidth = 20, boardHeight = 20) {
 
   const resetGame = () => {
     setGameState({
-      snake: [{ x: 0, y: 0 }],
+      snake: [INITIAL_SNAKE_POSITION],
       food: getRandomPosition(),
       item: getRandomPosition(),
-      direction: { x: 1, y: 0 },
+      direction: getRandomDirection(),
       score: 0,
       isPaused: false,
       isGameOver: false,

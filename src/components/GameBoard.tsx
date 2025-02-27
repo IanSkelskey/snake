@@ -1,8 +1,10 @@
 import React from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import Snake from './Snake';
 import BoardObject from './BoardObject';
+import HUD from './HUD';
 import { GameState } from '../logic/types';
+import { Container } from '@mui/system';
 
 interface GameBoardProps {
   gameState: GameState;
@@ -16,41 +18,24 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onPause, onReset, boar
   const { snake, food, item, score, isPaused } = gameState;
 
   return (
-    <Box textAlign="center" sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-      <Box mb={2}>
-        <Typography variant="h6">
-          <strong>Score:</strong> {score}{" "}
-          <span style={{ marginLeft: '1rem' }}>
-            <strong>Paused:</strong> {isPaused ? 'Yes' : 'No'}
-          </span>
-        </Typography>
-      </Box>
-
+    <Container>
+      <HUD score={score} isPaused={isPaused} onPause={onPause} onReset={onReset} />
       <Box
         sx={{
           width: '100%',
-          maxWidth: '600px', // Limit the maximum width for large screens
           aspectRatio: `${boardWidth} / ${boardHeight}`,
           border: '2px solid var(--border-color)',
           backgroundColor: 'var(--background-color)',
           position: 'relative',
           overflow: 'hidden',
+          flexGrow: 1,
         }}
       >
         <Snake snake={snake} boardWidth={boardWidth} boardHeight={boardHeight} />
         <BoardObject type="food" position={food} boardWidth={boardWidth} boardHeight={boardHeight} />
         <BoardObject type="item" position={item} boardWidth={boardWidth} boardHeight={boardHeight} />
       </Box>
-
-      <Box mt={2} sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
-        <Button variant="contained" color="primary" onClick={onPause}>
-          {isPaused ? 'Resume' : 'Pause'}
-        </Button>
-        <Button variant="contained" color="secondary" onClick={onReset}>
-          Reset
-        </Button>
-      </Box>
-    </Box>
+    </Container>
   );
 };
 
