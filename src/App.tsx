@@ -18,16 +18,15 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh', boxSizing: 'border-box' }}>
-        <AppBar position="fixed">
+      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh', width: '100vw' }}>
+        <AppBar position="sticky">
           <Toolbar>
             <Typography variant="h6" component="div">
               Snake Game
             </Typography>
           </Toolbar>
         </AppBar>
-        <Toolbar /> {/* This is to push the content below the AppBar */}
-        <Container sx={{ flexGrow: 1, overflow: 'hidden' }}>
+        <Container sx={{ display: 'flex', flexGrow: 1, overflow: 'hidden' }}>
           <SnakeGame />
         </Container>
       </Box>

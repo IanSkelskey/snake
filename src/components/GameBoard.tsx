@@ -18,16 +18,21 @@ const GameBoard: React.FC<GameBoardProps> = ({ gameState, onPause, onReset, boar
   const { snake, food, item, score, isPaused } = gameState;
 
   return (
-    <Container>
+    <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        msFlexDirection: 'column',
+        width: '100%',
+        height: '100%',
+      }}>
       <HUD score={score} isPaused={isPaused} onPause={onPause} onReset={onReset} />
       <Box
         sx={{
-          width: '100%',
-          aspectRatio: `${boardWidth} / ${boardHeight}`,
+          aspectRatio: '1',
           border: '2px solid var(--border-color)',
           backgroundColor: 'var(--background-color)',
           position: 'relative',
-          overflow: 'hidden',
           flexGrow: 1,
         }}
       >

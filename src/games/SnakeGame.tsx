@@ -16,7 +16,7 @@ function SnakeGame() {
     resetGame,
     boardWidth,
     boardHeight,
-  } = useSnakeGame(50, 50);
+  } = useSnakeGame(30, 30);
 
   // Hook up controls
   useControls({
@@ -38,16 +38,15 @@ function SnakeGame() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        flexGrow: 1,
+        width: '100%',
+        height: '100%',
+        overflow: 'hidden',
         '--border-color': (theme) => theme.palette.divider,
         '--background-color': (theme) => theme.palette.background.default,
         '--snake-color': (theme) => theme.palette.success.main,
         '--food-color': (theme) => theme.palette.error.main,
         '--item-color': (theme) => theme.palette.info.main,
-        minHeight: '100%',
-        width: '100%',
       }}
     >
       {!isStarted ? (
